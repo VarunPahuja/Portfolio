@@ -15,6 +15,8 @@ import {
 } from "lucide-react";
 import { experiences, education, socialLinks } from "@/data/profile";
 import profileAvatar from "@/assets/profile-avatar.jpg";
+import { stickers } from "@/data/stickers";
+import Sticker from "@/components/Stickers";
 
 // Tighter canvas - no wasted space
 const CW = 2200;
@@ -39,7 +41,7 @@ const Home = () => {
           className="w-[540px] p-5 z-20"
         >
           <div className="flex items-center gap-4 mb-5">
-            <img src={profileAvatar} alt="Varun Pahuja" className="w-14 h-14 rounded-full object-cover ring-2 ring-border shadow-lg" />
+            <img src={profileAvatar} alt="Varun Pahuja" className="w-14 h-14 rounded-full object-cover object-top ring-2 ring-border shadow-lg" />
             <div>
               <h1 className="text-xl font-bold text-card-foreground font-heading">Varun Pahuja</h1>
               <p className="text-sm text-muted-foreground">ML & Systems Developer</p>
@@ -280,6 +282,10 @@ const Home = () => {
         <CanvasCard style={{ left: CX + 548, top: CY + 298 }} rotation={4} variant="note" className="w-44">
           <p className="text-xs leading-relaxed">Thanks for exploring! 🙌</p>
         </CanvasCard>
+        {/* Stickers */}
+        {stickers.map((sticker, i) => (
+          <Sticker key={i} {...sticker} />
+        ))}        
 
       </DraggableCanvas>
     </>

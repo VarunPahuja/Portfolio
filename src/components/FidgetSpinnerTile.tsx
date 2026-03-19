@@ -43,9 +43,16 @@ const FidgetSpinnerTile = () => {
     };
   }, [loop]);
 
+  useEffect(() => {
+    const stop = () => {
+      isDraggingRef.current = false;
+      lastPosRef.current = null;
+    };
+    window.addEventListener("pointerup", stop);
+    return () => window.removeEventListener("pointerup", stop);
+  }, []);
   const handlePointerDown = (e: React.PointerEvent) => {
     e.stopPropagation();
-    e.currentTarget.setPointerCapture(e.pointerId);
     isDraggingRef.current = true;
     lastPosRef.current = { x: e.clientX, y: e.clientY };
     setIsInteractingWithTile(true);
@@ -84,7 +91,6 @@ const FidgetSpinnerTile = () => {
 
   const handlePointerUp = (e: React.PointerEvent) => {
     e.stopPropagation();
-    e.currentTarget.releasePointerCapture(e.pointerId);
     isDraggingRef.current = false;
     lastPosRef.current = null;
     setIsInteractingWithTile(false);

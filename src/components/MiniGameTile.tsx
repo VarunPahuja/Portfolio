@@ -70,7 +70,7 @@ const MiniGameTile = () => {
   // ── Scratch Card State ────────────────────────────────────────────────────
   const [isUnlocked, setIsUnlocked] = useState(false);
   const scratchRef = useRef<HTMLCanvasElement>(null);
-  const isScratching = useRef(false);
+  const isInteractingRef = useRef(false);
   const scratchLastPos = useRef<{ x: number; y: number } | null>(null);
   const scratchDist = useRef(0);
 
@@ -148,7 +148,7 @@ const MiniGameTile = () => {
     if (isUnlocked) return;
     e.stopPropagation();
     setIsInteractingWithTile(true);
-    isScratching.current = true;
+    isInteractingRef.current = true;
 
     const canvas = scratchRef.current;
     if (!canvas) return;
@@ -167,7 +167,7 @@ const MiniGameTile = () => {
   }, [isUnlocked, setIsInteractingWithTile]);
 
   const handleScratchMove = useCallback((e: React.PointerEvent) => {
-    if (!isScratching.current || isUnlocked) return;
+    if (!isInteractingRef.current || isUnlocked) return;
     e.stopPropagation();
     const canvas = scratchRef.current;
     if (!canvas || !scratchLastPos.current) return;
@@ -193,14 +193,14 @@ const MiniGameTile = () => {
     if (scratchDist.current > 3500 && !isUnlocked) {
       setIsUnlocked(true);
       setIsInteractingWithTile(false);
-      isScratching.current = false;
+      isInteractingRef.current = false;
     }
   }, [isUnlocked, setIsInteractingWithTile]);
 
   const handleScratchEnd = useCallback((e: React.PointerEvent) => {
     if (isUnlocked) return;
     e.stopPropagation();
-    isScratching.current = false;
+    isInteractingRef.current = false;
     scratchLastPos.current = null;
     setIsInteractingWithTile(false);
   }, [isUnlocked, setIsInteractingWithTile]);
@@ -239,6 +239,14 @@ const MiniGameTile = () => {
   }, [gameMode, initPacman, initSnake]);
 
   useEffect(() => { resetGame(); }, [gameMode]);
+
+  useEffect(() => {
+    const stop = () => {
+      isInteractingRef.current = false;
+    };
+    window.addEventListener("pointerup", stop);
+    return () => window.removeEventListener("pointerup", stop);
+  }, []);
 
   // ── Step functions ────────────────────────────────────────────────────────
   const stepSnake = useCallback(() => {
