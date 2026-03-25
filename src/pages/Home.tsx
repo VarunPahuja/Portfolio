@@ -235,16 +235,15 @@ const Home = () => {
         </CanvasCard>
 
         {/* Music vinyl tiles */}
+
         <CanvasCard
           style={{ left: CW - 382, top: CY + 86 }}
           rotation={4}
           className="overflow-visible bg-transparent border-none shadow-none p-0"
         >
           <MusicVinylTile
-            title="Dreamscape Drive"
-            artist="Lo-Fi Session"
-            src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-            coverGradient="linear-gradient(135deg, #3a0ca3, #f72585)"
+            src="/Music/veridis.mp3"
+            coverImage="/Thumbnail/DaftPunkVerdisQuo.jpg"
           />
         </CanvasCard>
 
@@ -254,10 +253,8 @@ const Home = () => {
           className="overflow-visible bg-transparent border-none shadow-none p-0"
         >
           <MusicVinylTile
-            title="Night City Loop"
-            artist="Synth Bloom"
-            src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-            coverGradient="linear-gradient(135deg, #0f4c5c, #1d7874)"
+            src="/Music/dreams.mp3"
+            coverImage="/Thumbnail/FleetwoodMacDreams.jpg"
           />
         </CanvasCard>
 
@@ -267,10 +264,8 @@ const Home = () => {
           className="overflow-visible bg-transparent border-none shadow-none p-0"
         >
           <MusicVinylTile
-            title="Rainy Beats"
-            artist="Chill Deck"
-            src="https://samplelib.com/lib/preview/mp3/sample-3s.mp3"
-            coverGradient="linear-gradient(135deg, #264653, #2a9d8f)"
+            src="/Music/morning.mp3"
+            coverImage="/Thumbnail/HallAndOatesWhenTheMorningComes.jpg"
           />
         </CanvasCard>
 
@@ -279,13 +274,13 @@ const Home = () => {
           <p className="text-xs leading-relaxed">"Ship fast, iterate faster" 🚀</p>
         </CanvasCard>
 
-        <CanvasCard style={{ left: CX + 548, top: CY + 298 }} rotation={4} variant="note" className="w-44">
+        <CanvasCard style={{ left: CX + 700, top: CY + 298 }} rotation={4} variant="note" className="w-44">
           <p className="text-xs leading-relaxed">Thanks for exploring! 🙌</p>
         </CanvasCard>
         {/* Stickers */}
         {stickers.map((sticker, i) => (
           <Sticker key={i} {...sticker} />
-        ))}        
+        ))}
 
       </DraggableCanvas>
     </>
