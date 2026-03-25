@@ -5,6 +5,7 @@ export interface Project {
   description: string;
   tags: string[];
   color: string;
+  github?: string;
 }
 
 export const projects: Project[] = [
@@ -15,6 +16,7 @@ export const projects: Project[] = [
     description: "Focused on building a collaborative, low-friction way to decide what to watch with live sync and presence systems.",
     tags: ["TypeScript", "React", "Firebase", "Firestore", "Tailwind", "shadcn/ui"],
     color: "from-blue-500/10 to-indigo-500/10",
+    github: "https://github.com/VarunPahuja/MovieMatch",
   },
   {
     id: "stremtify",
@@ -23,6 +25,7 @@ export const projects: Project[] = [
     description: "Automates a messy manual workflow using async pipelines and structured scraping.",
     tags: ["Python", "Spotipy API", "aiohttp", "asyncio", "Streamlit"],
     color: "from-green-500/10 to-emerald-500/10",
+    github: "https://github.com/VarunPahuja/stremtify",
   },
   {
     id: "nutricare",
@@ -31,6 +34,7 @@ export const projects: Project[] = [
     description: "Exploring how data-driven recommendations can simplify tracking and improve consistency.",
     tags: ["TypeScript", "React", "Vite", "Tailwind", "shadcn/ui", "Python", "FastAPI", "ML"],
     color: "from-orange-500/10 to-amber-500/10",
+    github: "https://github.com/VarunPahuja/NutriCare",
   },
   {
     id: "scenemetric",
@@ -39,6 +43,16 @@ export const projects: Project[] = [
     description: "Currently exploring preprocessing pipelines and interpretable feature extraction.",
     tags: ["Python", "OpenCV", "NumPy"],
     color: "from-cyan-500/10 to-blue-500/10",
+    github: "https://github.com/VarunPahuja/SceneMetric",
+  },
+  {
+    id: "movie-sentiment",
+    title: "Movie Review Sentiment",
+    hook: "NLP pipeline for sentiment classification with added emotion detection and interpretability.",
+    description: "Built a TF-IDF based sentiment classifier (~89% accuracy) using ML models (NB, LR, SVM).Extended with emotion detection and keyword extraction for deeper insight into predictions.",
+    tags: ["Python", "NLP", "Scikit-learn", "Transformers", "TF-IDF", "IMDb Dataset"],
+    color: "from-indigo-500/10 to-blue-500/10",
+    github: "https://github.com/YugParekh/movie-review-sentiment",
   },
   {
     id: "flightdelay",
@@ -47,6 +61,7 @@ export const projects: Project[] = [
     description: "Built to understand key factors affecting delays and evaluate predictive performance.",
     tags: ["Python", "Pandas", "Scikit-learn"],
     color: "from-purple-500/10 to-fuchsia-500/10",
+    github: "https://github.com/VarunPahuja/FlightDelay_PredictiveAnalysis",
   },
   {
     id: "hopon",
@@ -55,6 +70,7 @@ export const projects: Project[] = [
     description: "Built as an end-to-end MVP with a focus on clean user flows and deployment.",
     tags: ["TypeScript", "React", "Node.js", "Express", "MongoDB", "JWT", "Tailwind"],
     color: "from-rose-500/10 to-pink-500/10",
+    github: "https://github.com/VarunPahuja/HopOn",
   },
   {
     id: "spark25",
@@ -63,6 +79,7 @@ export const projects: Project[] = [
     description: "Focused on rapid prototyping, ML integration, and building a usable dashboard under time constraints.",
     tags: ["Python", "Scikit-learn", "Pandas", "NumPy", "TypeScript", "Dashboard UI"],
     color: "from-yellow-500/10 to-orange-500/10",
+    github: "https://github.com/VarunPahuja/spark25",
   },
   {
     id: "vanetuav",
@@ -71,6 +88,7 @@ export const projects: Project[] = [
     description: "Explores robustness under non-IID data and adversarial conditions.",
     tags: ["Python", "Federated Learning", "ML", "Jupyter"],
     color: "from-teal-500/10 to-emerald-500/10",
+    github: "https://github.com/VarunPahuja/VanetUAV",
   },
   {
     id: "ai-internship",
@@ -79,6 +97,7 @@ export const projects: Project[] = [
     description: "Early exploration into applying NLP and similarity-based matching.",
     tags: ["Python", "Scikit-learn", "Streamlit", "Pandas"],
     color: "from-indigo-500/10 to-violet-500/10",
+    github: "https://github.com/VarunPahuja/AI-Powered-Internship-Project-Recommender",
   },
   {
     id: "gapminder",
@@ -87,6 +106,7 @@ export const projects: Project[] = [
     description: "Focused on understanding data storytelling and visual exploration.",
     tags: ["Python", "Plotly", "Pandas"],
     color: "from-lime-500/10 to-green-500/10",
+    github: "https://github.com/VarunPahuja/Gapminder-Data-Visualization-with-Plotly",
   },
   {
     id: "airbnb-nyc",
@@ -95,5 +115,7 @@ export const projects: Project[] = [
     description: "Used to build intuition around real-world datasets and cleaning workflows.",
     tags: ["Python", "Pandas", "Matplotlib"],
     color: "from-red-500/10 to-rose-500/10",
-  }
+    github: "https://github.com/VarunPahuja/AirbnbNYCDataAnalysisProject",
+  },
 ];
+

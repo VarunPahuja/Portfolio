@@ -158,7 +158,12 @@ const Projects = () => {
                     ))}
                   </ul>
                   <div className="mt-auto pt-2">
-                    <a href="#" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-[15px] font-medium text-muted-foreground hover:text-foreground transition-colors group">
+                    <a 
+                      href={project.github || "#"} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="inline-flex items-center text-[15px] font-medium text-muted-foreground hover:text-foreground transition-colors group"
+                    >
                       View on GitHub <span className="ml-1 transition-transform group-hover:translate-x-1">→</span>
                     </a>
                   </div>
