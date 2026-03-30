@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 const EMAIL_ADDRESS = "vpahuja1508@gmail.com";
-const RESUME_URL = "https://drive.google.com/file/d/1sk6eBZPFN1LeUKKV1vu3_f-uA-myI_tm/view?usp=drive_link";
+const RESUME_URL = "https://drive.google.com/file/d/1dddnzQMvL1ny7c6YVr2AY2wZFCax7f_5/view?usp=sharing";
 
 const links = [
   { name: "GitHub", href: "https://github.com/VarunPahuja" },
