@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 const EMAIL_ADDRESS = "vpahuja1508@gmail.com";
-const RESUME_URL = "https://drive.google.com/file/d/1dddnzQMvL1ny7c6YVr2AY2wZFCax7f_5/view?usp=sharing";
+const RESUME_URL = "https://drive.google.com/file/d/1clf2NqHAKosf2thGTxzI8lHHFHJY_o-q/view?usp=sharing";
 
 const links = [
   { name: "GitHub", href: "https://github.com/VarunPahuja" },
@@ -25,7 +25,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen relative flex flex-col justify-center bg-background">
       <main className="relative z-10 px-6 pt-24 pb-32 w-full max-w-lg mx-auto flex flex-col items-center">
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

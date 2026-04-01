@@ -19,6 +19,15 @@ export const projects: Project[] = [
     github: "https://github.com/VarunPahuja/MovieMatch",
   },
   {
+    id: "nowcard",
+    title: "NowCard",
+    hook: "Dynamic GitHub README card engine that showcases real-time music activity and developer context via live SVG rendering.",
+    description: "Built a high-performance SVG generation system that aggregates cross-platform music data via Last.fm and renders customizable, real-time developer identity cards with zero client overhead.",
+    tags: ["Next.js", "TypeScript", "Tailwind", "Clerk", "Last.fm API", "SVG"],
+    color: "from-purple-500/10 to-pink-500/10",
+    github: "https://github.com/VarunPahuja/NowCard",
+  },
+  {
     id: "stremtify",
     title: "stremtify",
     hook: "Tool to convert Spotify playlists into downloadable high-quality audio by scraping and verifying FLAC sources.",
