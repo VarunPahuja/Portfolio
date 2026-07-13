@@ -1,4 +1,4 @@
-import { Twitter, Linkedin, Github, Mail } from "lucide-react";
+import { Linkedin, Github, Mail } from "lucide-react";
 
 export const experiences = [
   { company: "Glitch! eSports Society", role: "Director of External Relations", period: "May 2024 – Present", color: "bg-emerald-500", details: "₹200K+ sponsorships, 35% partner growth, 2000+ participant events" },

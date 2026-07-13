@@ -112,52 +112,46 @@ const ProjectDetail = () => {
           </p>
         </motion.div>
 
-        {/* Placeholder Sections - Can be expanded later */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="grid sm:grid-cols-2 gap-8 mb-12"
-        >
-          <div>
-            <h3 className="text-lg font-semibold text-foreground mb-3 font-heading">
-              Key Features
-            </h3>
-            <ul className="space-y-2 text-muted-foreground">
-              <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">✦</span>
-                <span>Scalable architecture with modern best practices</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">✦</span>
-                <span>Optimized performance and user experience</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">✦</span>
-                <span>Comprehensive testing and documentation</span>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-foreground mb-3 font-heading">
-              Impact
-            </h3>
-            <ul className="space-y-2 text-muted-foreground">
-              <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">✦</span>
-                <span>Improved workflow efficiency</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">✦</span>
-                <span>Enhanced user engagement</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">✦</span>
-                <span>Measurable business results</span>
-              </li>
-            </ul>
-          </div>
-        </motion.div>
+        {/* Key Features & Impact */}
+        {(project.features?.length || project.impact?.length) ? (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="grid sm:grid-cols-2 gap-8 mb-12"
+          >
+            {project.features && project.features.length > 0 && (
+              <div>
+                <h3 className="text-lg font-semibold text-foreground mb-3 font-heading">
+                  Key Features
+                </h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  {project.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-2">
+                      <span className="text-primary mt-1">✦</span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {project.impact && project.impact.length > 0 && (
+              <div>
+                <h3 className="text-lg font-semibold text-foreground mb-3 font-heading">
+                  Impact
+                </h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  {project.impact.map((point) => (
+                    <li key={point} className="flex items-start gap-2">
+                      <span className="text-primary mt-1">✦</span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </motion.div>
+        ) : null}
 
         {/* CTA Section */}
         <motion.div

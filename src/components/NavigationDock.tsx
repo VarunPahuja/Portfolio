@@ -1,4 +1,4 @@
-import { Home, FolderOpen, Sparkles, Camera, Mail, Moon, Sun, Volume2, VolumeX } from "lucide-react";
+import { Home, FolderOpen, Sparkles, Camera, Mail, Moon, Sun, Volume2, VolumeX, BookOpen } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTheme } from "@/hooks/use-theme";
@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 const navItems = [
   { icon: Home, label: "Home", path: "/" },
   { icon: FolderOpen, label: "Projects", path: "/projects" },
+  { icon: BookOpen, label: "Blog", href: "https://medium.com/@vpahuja1508", external: true },
   { icon: Sparkles, label: "Beyond Work", path: "/beyond-work" },
   { icon: Camera, label: "Photos", path: "/photos" },
   { icon: Mail, label: "Contact", path: "/contact" },
@@ -41,6 +42,24 @@ const NavigationDock = () => {
             item.label = isAltName ? "Side Quests" : "Beyond Work";
           }
           const Icon = item.icon;
+
+          if (item.external) {
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={playClick}
+                className="nav-button flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-xl text-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background text-muted-foreground hover:text-card-foreground hover:bg-muted/60"
+                aria-label={item.label}
+                title={item.label}
+              >
+                <Icon className="w-4 h-4" />
+              </a>
+            );
+          }
+
           const isActive = location.pathname === item.path;
           return (
             <button
@@ -49,7 +68,7 @@ const NavigationDock = () => {
                 if (item.path === "/beyond-work") {
                   toggleAltName();
                 }
-                handleNavClick(item.path);
+                handleNavClick(item.path!);
               }}
               className={cn(
                 "nav-button flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-xl text-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
