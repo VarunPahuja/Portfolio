@@ -43,7 +43,7 @@ const Home = () => {
           <div className="flex items-center gap-4 mb-5">
             <img src={profileAvatar} alt="Varun Pahuja" className="w-14 h-14 rounded-full object-cover object-top ring-2 ring-border shadow-lg" />
             <div>
-              <h1 className="text-xl font-bold text-card-foreground font-heading">Varun Pahuja</h1>
+              <h1 className="text-2xl font-bold tracking-tight text-card-foreground font-heading">Varun Pahuja</h1>
               <p className="text-sm text-muted-foreground">ML & Systems Developer</p>
               <p className="text-xs text-muted-foreground mt-0.5">Jaipur, India</p>
             </div>
@@ -90,7 +90,7 @@ const Home = () => {
                   </div>
                   <span className="text-xs text-muted-foreground whitespace-nowrap">{edu.period}</span>
                 </div>
-                <p className="text-xs text-primary/80 ml-5 font-medium">{edu.gpa}</p>
+                <p className="text-xs text-primary ml-5 font-medium">{edu.gpa}</p>
               </div>
             ))}
           </div>
@@ -132,7 +132,7 @@ const Home = () => {
         {/* Skills Card - below projects */}
         <CanvasCard
           style={{ left: CX + 324, top: CY + 26 + GAP }}
-          className="w-[320px] p-4"
+          className="w-[320px] p-5"
         >
           <div className="flex items-center gap-2 mb-3">
             <div className="w-7 h-7 bg-accent/10 rounded-lg flex items-center justify-center">
@@ -209,7 +209,7 @@ const Home = () => {
 
         {/* Bucket list - bottom left */}
         <CanvasCard
-          style={{ left: 88 + GAP, top: CY + 352 }}
+          style={{ left: 130 + GAP, top: CY + 180 }}
           rotation={-2}
           className="w-[440px] h-[300px] p-4"
         >
@@ -227,7 +227,7 @@ const Home = () => {
 
         {/* Fidget Spinner Tile */}
         <CanvasCard
-          style={{ left: CX + 1300, top: CY + 300 }}
+          style={{ left: CW - 720, top: CY + 500 }} // pulled inside canvas bounds (was CX+1300 = 2400, past CW=2200)
           rotation={0}
           className="w-64 h-64 p-0 shadow-none bg-transparent border-none"
         >

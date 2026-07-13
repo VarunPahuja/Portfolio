@@ -79,7 +79,7 @@ const ProjectDetail = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+          transition={{ delay: 0.05 }}
           className="mb-12"
         >
           <h2 className="text-xl font-semibold text-foreground mb-4 font-heading">
@@ -101,7 +101,7 @@ const ProjectDetail = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.1 }}
           className="mb-12"
         >
           <h2 className="text-xl font-semibold text-foreground mb-4 font-heading">
@@ -117,7 +117,7 @@ const ProjectDetail = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.15 }}
             className="grid sm:grid-cols-2 gap-8 mb-12"
           >
             {project.features && project.features.length > 0 && (
@@ -157,7 +157,7 @@ const ProjectDetail = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
+          transition={{ delay: 0.2 }}
           className="flex gap-4"
         >
           {project.liveUrl && (

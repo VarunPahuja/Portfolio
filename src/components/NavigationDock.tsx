@@ -31,7 +31,7 @@ const NavigationDock = () => {
     <motion.nav
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
+      transition={{ delay: 0.3, type: "spring", stiffness: 260, damping: 24 }}
       style={{ left: "50%", x: "-50%" }}
       className="fixed bottom-4 sm:bottom-6 z-50 w-fit"
     >
