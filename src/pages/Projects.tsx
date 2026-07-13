@@ -50,7 +50,7 @@ const Projects = () => {
             Projects
           </h1>
           <p className="text-muted-foreground max-w-lg mx-auto">
-            A collection of work that showcases my passion for design and development.
+            A collection of ML, systems, and full-stack projects.
           </p>
         </motion.div>
 
@@ -159,7 +159,7 @@ const Projects = () => {
                   </ul>
                   <div className="mt-auto pt-2">
                     <a 
-                      href={project.github || "#"} 
+                      href={project.githubUrl || "#"}
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="inline-flex items-center text-[15px] font-medium text-muted-foreground hover:text-foreground transition-colors group"
