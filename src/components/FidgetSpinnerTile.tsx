@@ -9,8 +9,14 @@ const FidgetSpinnerTile = () => {
   const lastPosRef = useRef<{ x: number; y: number } | null>(null);
   const spinnerRef = useRef<SVGSVGElement>(null);
   const rafRef = useRef<number>();
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const isVisible = useRef(true);
 
   const loop = useCallback(() => {
+    if (!isVisible.current) {
+      rafRef.current = requestAnimationFrame(loop);
+      return;
+    }
     // Apply very low friction (99.7% retention per frame) for long-lasting spins
     if (!isDraggingRef.current) {
       velocityRef.current *= 0.997;
@@ -42,6 +48,17 @@ const FidgetSpinnerTile = () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [loop]);
+
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisible.current = entry.isIntersecting; },
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const stop = () => {
@@ -98,6 +115,7 @@ const FidgetSpinnerTile = () => {
 
   return (
     <div
+      ref={wrapperRef}
       className="w-full h-full relative cursor-grab active:cursor-grabbing touch-none flex items-center justify-center p-2 rounded-full"
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
