@@ -8,13 +8,13 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { SoundProvider } from "@/hooks/use-sound";
+import { MusicPlayerProvider } from "@/hooks/use-music-player";
 import { AltNameProvider } from "@/hooks/use-alt-name";
 import NavigationDock from "@/components/NavigationDock";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import BeyondWork from "./pages/BeyondWork";
-import BlogPost from "./pages/BlogPost";
 import Contact from "./pages/Contact";
 import Photos from "./pages/Photos";
 import NotFound from "./pages/NotFound";
@@ -59,7 +59,6 @@ const AppContent = () => {
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:id" element={<ProjectDetail />} />
           <Route path="/beyond-work" element={<BeyondWork />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/photos" element={<Photos />} />
           <Route path="*" element={<NotFound />} />
@@ -74,16 +73,18 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
       <SoundProvider>
-        <AltNameProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <AppContent />
-              <Analytics />
-            </BrowserRouter>
-          </TooltipProvider>
-        </AltNameProvider>
+        <MusicPlayerProvider>
+          <AltNameProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <AppContent />
+                <Analytics />
+              </BrowserRouter>
+            </TooltipProvider>
+          </AltNameProvider>
+        </MusicPlayerProvider>
       </SoundProvider>
     </ThemeProvider>
   </QueryClientProvider>

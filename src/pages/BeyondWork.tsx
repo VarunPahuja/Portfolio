@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { PenLine } from "lucide-react";
 import { useAltName } from "@/hooks/use-alt-name";
 
 const topArtists = [
@@ -104,6 +105,28 @@ const BeyondWork = () => {
                 <li key={artist}>{artist}</li>
               ))}
             </ul>
+          </motion.section>
+
+          {/* 5. WRITING */}
+          <motion.section variants={item}>
+            <h2 className="text-sm font-semibold tracking-wider text-foreground mb-6">
+              writing
+            </h2>
+            <p className="text-[15px] sm:text-base leading-relaxed text-muted-foreground mb-4">
+              Thoughts on ML, systems, and building things.
+            </p>
+            <a
+              href="https://medium.com/@vpahuja1508"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-between gap-3 rounded-lg border border-border/60 bg-muted/30 px-4 py-3 text-[15px] text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+            >
+              <span className="flex items-center gap-2">
+                <PenLine className="w-4 h-4" />
+                Read on Medium
+              </span>
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </a>
           </motion.section>
 
         </motion.div>

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSound } from "@/hooks/use-sound";
+import { useMusicPlayer } from "@/hooks/use-music-player";
 
 interface MusicVinylTileProps {
   src: string;
@@ -11,6 +12,8 @@ const MusicVinylTile = ({ src, coverImage }: MusicVinylTileProps) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const { soundEnabled } = useSound();
+  const { currentlyPlayingId, setCurrentlyPlayingId } = useMusicPlayer();
+  const tileId = src;
 
   useEffect(() => {
     if (!soundEnabled && isPlaying) {
@@ -21,6 +24,14 @@ const MusicVinylTile = ({ src, coverImage }: MusicVinylTileProps) => {
       setIsPlaying(false);
     }
   }, [soundEnabled, isPlaying]);
+
+  useEffect(() => {
+    if (currentlyPlayingId !== tileId && isPlaying) {
+      // Another tile started playing — pause this one
+      audioRef.current?.pause();
+      setIsPlaying(false);
+    }
+  }, [currentlyPlayingId, tileId, isPlaying]);
 
   useEffect(() => {
     return () => {
@@ -40,15 +51,13 @@ const MusicVinylTile = ({ src, coverImage }: MusicVinylTileProps) => {
         audioRef.current.currentTime = 0;
       }
       setIsPlaying(false);
+      setCurrentlyPlayingId(null);
       return;
     }
 
-    // Stop all other audio elements
-    document.querySelectorAll("audio").forEach((a) => {
-      (a as HTMLAudioElement).pause();
-    });
-
     if (!soundEnabled) return;
+
+    setCurrentlyPlayingId(tileId);
 
     if (!audioRef.current) {
       audioRef.current = new Audio(src);
@@ -71,7 +80,7 @@ const MusicVinylTile = ({ src, coverImage }: MusicVinylTileProps) => {
 
   return (
     <div
-      className="relative w-36 h-36 select-none"
+      className="relative overflow-visible w-36 h-36 select-none"
       onPointerDown={(e) => e.stopPropagation()}
     >
       {/* Vinyl disc */}
@@ -111,6 +120,28 @@ const MusicVinylTile = ({ src, coverImage }: MusicVinylTileProps) => {
           className="absolute inset-0 w-full h-full object-cover"
         />
       </div>
+
+      <AnimatePresence mode="wait">
+        {!soundEnabled && !isPlaying && (
+          <motion.div
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 4 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="absolute -bottom-7 left-1/2 -translate-x-1/2
+                       whitespace-nowrap pointer-events-none select-none"
+          >
+            <div className="flex items-center gap-1.5 bg-background/90
+                            backdrop-blur-sm border border-border/60
+                            rounded-full px-3 py-1 shadow-sm">
+              <span className="text-[11px] text-muted-foreground
+                               tracking-wide font-medium">
+                enable sound to listen
+              </span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

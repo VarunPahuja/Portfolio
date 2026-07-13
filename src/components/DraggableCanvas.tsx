@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, ReactNode, useCallback, useMemo, createContext } from "react";
-import { motion, useMotionValue, useSpring, PanInfo } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring, PanInfo } from "framer-motion";
 
 export const CanvasContext = createContext({
   setIsInteractingWithTile: (_value: boolean) => { }
@@ -21,7 +21,12 @@ const DraggableCanvas = ({
 }: DraggableCanvasProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isDraggingCanvas = useRef(false);
-  const [showHint, setShowHint] = useState(true);
+  const [showHint, setShowHint] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("canvas-hint-seen") !== "true";
+    }
+    return true;
+  });
   const [viewportSize, setViewportSize] = useState({ width: 0, height: 0 });
   const isMobile = useIsMobile();
 
@@ -112,6 +117,7 @@ const DraggableCanvas = ({
       event.preventDefault();
       if (isDraggingCanvas.current) return; // Pointer priority: ignore scroll if dragging
       setShowHint(false);
+      localStorage.setItem("canvas-hint-seen", "true");
 
       const modeFactor = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? viewportSize.height || 1 : 1;
       const wheelScale = 1.0;
@@ -151,6 +157,7 @@ const DraggableCanvas = ({
         dragElastic={0}
         onDragStart={() => {
           setShowHint(false);
+          localStorage.setItem("canvas-hint-seen", "true");
           isDraggingCanvas.current = true;
         }}
         onDragEnd={() => {
@@ -163,6 +170,41 @@ const DraggableCanvas = ({
           {children}
         </CanvasContext.Provider>
       </motion.div>
+
+      <AnimatePresence>
+        {showHint && (
+          <motion.div
+            className="absolute bottom-8 left-1/2 -translate-x-1/2
+                       pointer-events-none select-none z-20"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.4, ease: "easeOut", delay: 1.5 }}
+          >
+            <div className="flex items-center gap-2
+                            bg-background/80 backdrop-blur-md
+                            border border-border/50 rounded-full
+                            px-4 py-2 shadow-lg">
+              <motion.div
+                animate={{ x: [0, 4, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity,
+                              ease: "easeInOut" }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24"
+                     fill="none" className="text-muted-foreground">
+                  <path d="M5 12h14M13 6l6 6-6 6"
+                        stroke="currentColor" strokeWidth="1.5"
+                        strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </motion.div>
+              <span className="text-xs text-muted-foreground
+                               font-medium tracking-wide">
+                drag to explore
+              </span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Edge fade indicators */}
       <div className="pointer-events-none absolute inset-0 z-30">
