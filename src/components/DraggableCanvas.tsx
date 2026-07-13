@@ -97,7 +97,7 @@ const DraggableCanvas = ({
     }
   }, [getClampedPosition, height, initialFocus, viewportSize, width, x, y, scale]);
 
-  const handleDrag = (_: any, info: PanInfo) => {
+  const handleDrag = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const clamped = getClampedPosition(x.get() + info.delta.x, y.get() + info.delta.y);
     x.set(clamped.x);
     y.set(clamped.y);
