@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 import { projects, type Project } from "@/data/projects";
 import { cn } from "@/lib/utils";
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
+const containerVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+const cardVariants = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
 };
 
 const Projects = () => {
@@ -57,12 +58,11 @@ const Projects = () => {
     <Link to={`/projects/${project.id}`} key={project.id} className="block group/card">
       <motion.article
         layout
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
+        variants={cardVariants}
         exit={{ opacity: 0, scale: 0.95 }}
         whileHover={variant === "learning" ? { y: -2 } : { y: -4 }}
         className={cn(
-          `flex flex-col bg-gradient-to-br ${project.color} backdrop-blur-sm border border-border/50 rounded-2xl`,
+          `flex flex-col bg-gradient-to-br ${project.color} backdrop-blur-sm border border-border/50 rounded-2xl hover:shadow-lg transition-shadow duration-200`,
           variant === "learning"
             ? "p-5 opacity-80 hover:opacity-100 transition-opacity duration-200"
             : "p-6"
@@ -80,8 +80,7 @@ const Projects = () => {
         </div>
         <p
           className={cn(
-            "text-foreground font-medium mb-2 leading-relaxed",
-            variant === "learning" ? "text-sm" : "text-[15px]"
+            "text-foreground mb-2 leading-relaxed text-base font-semibold",
           )}
         >
           {project.hook}
@@ -100,15 +99,17 @@ const Projects = () => {
           ))}
         </ul>
         <div className="mt-auto pt-2">
-          <a
-            href={project.githubUrl || "#"}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center text-[15px] font-medium text-muted-foreground hover:text-foreground transition-colors group"
-          >
-            View on GitHub <span className="ml-1 transition-transform group-hover:translate-x-1">→</span>
-          </a>
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group"
+            >
+              View on GitHub <span className="ml-1 transition-transform group-hover:translate-x-1">→</span>
+            </a>
+          )}
         </div>
       </motion.article>
     </Link>
@@ -158,7 +159,7 @@ const Projects = () => {
         >
           <button
             onClick={() => setSelectedTag(null)}
-            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
+            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 ${
               selectedTag === null
                 ? "bg-primary text-primary-foreground shadow-sm"
                 : "bg-muted text-muted-foreground hover:bg-muted/80"
@@ -170,7 +171,7 @@ const Projects = () => {
             <button
               key={tag}
               onClick={() => setSelectedTag(tag)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
+              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 ${
                 selectedTag === tag
                   ? "bg-primary text-primary-foreground shadow-sm"
                   : "bg-muted text-muted-foreground hover:bg-muted/80"
@@ -195,7 +196,7 @@ const Projects = () => {
 
         {/* Projects Grid */}
         <motion.div
-          variants={container}
+          variants={containerVariants}
           initial="hidden"
           animate="show"
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
@@ -235,7 +236,7 @@ const Projects = () => {
             </motion.div>
 
             <motion.div
-              variants={container}
+              variants={containerVariants}
               initial="hidden"
               animate="show"
               className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"

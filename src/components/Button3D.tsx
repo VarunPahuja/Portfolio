@@ -24,7 +24,7 @@ const Button3D = forwardRef<HTMLButtonElement, Button3DProps>(
     };
 
     const variantClasses = {
-      default: "bg-card text-card-foreground border-border shadow-[0_4px_0_0_hsl(var(--border))] hover:shadow-[0_2px_0_0_hsl(var(--border))] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px]",
+      default: "bg-card text-card-foreground border-border shadow-[0_4px_0_0_hsl(var(--border))] dark:shadow-[0_4px_0_0_hsl(217_32%_30%)] hover:shadow-[0_2px_0_0_hsl(var(--border))] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px]",
       outline: "bg-transparent text-foreground border-2 border-current shadow-[0_4px_0_0_currentColor] hover:shadow-[0_2px_0_0_currentColor] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px]",
       ghost: "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground",
     };

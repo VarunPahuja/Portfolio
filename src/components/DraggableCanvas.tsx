@@ -144,7 +144,7 @@ const DraggableCanvas = ({
       className="absolute inset-0 w-full h-full overflow-hidden touch-none"
     >
       <motion.div
-        className="absolute origin-top-left"
+        className="absolute origin-top-left cursor-grab active:cursor-grabbing"
         style={{ x, y, width, height, scale }}
         drag={!isInteractingWithTile}
         dragMomentum={false}

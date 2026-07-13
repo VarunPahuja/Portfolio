@@ -77,7 +77,7 @@ export const projects: Project[] = [
     hook: "NLP pipeline for sentiment classification with added emotion detection and interpretability.",
     description: "Movie reviews carry more than positive/negative — this collaborative TF-IDF classifier (NB/LR/SVM, ~89% accuracy) adds emotion detection and keyword extraction for deeper insight.",
     tags: ["Python", "NLP", "Scikit-learn", "Transformers", "TF-IDF", "IMDb Dataset"],
-    color: "from-indigo-500/10 to-blue-500/10",
+    color: "from-sky-500/10 to-cyan-500/10",
     // TODO: replace with correct repo URL or collaboration note
     githubUrl: "",
   },

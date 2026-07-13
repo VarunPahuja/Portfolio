@@ -13,7 +13,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 20% 15%;
 
-    --primary: 213 80% 52%;
+    --primary: 213 80% 45%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 210 40% 96%;
@@ -46,7 +46,7 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
 
     --font-heading: 'Space Grotesk', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
+    --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
   }
 
   .dark {
@@ -254,6 +254,8 @@ main {
 }
 
 /* Scrollbar styling */
+* { scrollbar-width: thin; scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent; }
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
