@@ -66,6 +66,9 @@ const MiniGameTile = () => {
   const [isHovered, setIsHovered] = useState(false);
   const isHoveredRef = useRef(false);
   const rafRef = useRef<number>();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isVisible = useRef(true);
+  const wasHidden = useRef(false);
 
   // ── Scratch Card State ────────────────────────────────────────────────────
   const [isUnlocked, setIsUnlocked] = useState(false);
@@ -530,6 +533,16 @@ const MiniGameTile = () => {
 
   // ── Game loop ─────────────────────────────────────────────────────────────
   const loop = useCallback((now: number) => {
+    if (!isVisible.current) {
+      rafRef.current = requestAnimationFrame(loop);
+      return;
+    }
+    if (wasHidden.current) {
+      lastPacTickRef.current = now;
+      lastGhostTickRef.current = now;
+      lastSnakeTickRef.current = now;
+      wasHidden.current = false;
+    }
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
     if (!ctx) { rafRef.current = requestAnimationFrame(loop); return; }
@@ -571,6 +584,22 @@ const MiniGameTile = () => {
     return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
   }, [loop]);
 
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          wasHidden.current = true;
+        }
+        isVisible.current = entry.isIntersecting;
+      },
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   // ── Keyboard ──────────────────────────────────────────────────────────────
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -611,6 +640,7 @@ const MiniGameTile = () => {
   // ── JSX ───────────────────────────────────────────────────────────────────
   return (
     <div
+      ref={containerRef}
       className="relative flex flex-col items-center select-none"
       onPointerEnter={() => {
         setIsInteractingWithTile(true);
