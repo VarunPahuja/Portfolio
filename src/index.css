@@ -181,6 +181,14 @@
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
 }
 
+.dark .polaroid {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.dark .polaroid:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
 /* Experience dot colors */
 .dot-cyan { background-color: hsl(190, 80%, 55%); }
 .dot-green { background-color: hsl(145, 70%, 45%); }

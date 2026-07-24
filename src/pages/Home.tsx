@@ -9,6 +9,7 @@ import DrawTile from "@/components/DrawTile";
 import BucketListTile from "@/components/BucketListTile";
 import MiniGameTile from "@/components/MiniGameTile";
 import FidgetSpinnerTile from "@/components/FidgetSpinnerTile";
+import NowCardTile from "@/components/NowCardTile";
 import { useAltName } from "@/hooks/use-alt-name";
 import {
   FolderOpen, Camera, ArrowRight, Sparkles, Code, GraduationCap, Coffee, Music, ArrowLeft
@@ -195,6 +196,11 @@ const Home = () => {
         >
           <DrawTile />
         </CanvasCard>
+
+        {/* Now Playing - live card, floats next to the profile card */}
+        <div className="absolute z-20" style={{ left: CX - 70 - 50, top: CY - 640 }}>
+          <NowCardTile />
+        </div>
 
         {/* Sketch Pad Hint */}
         <div
