@@ -25,6 +25,26 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/VarunPahuja/MovieMatch",
   },
   {
+    id: "exit-plan",
+    title: "Exit Plan",
+    hook: "AI immigration platform ranking countries for Indian graduates based on personalized, research-backed criteria.",
+    description: "Choosing a country to emigrate to means wading through scattered visa policies and opinions — Exit Plan ranks 10 countries against research-informed criteria, weighted by what the user actually cares about.",
+    tags: ["FastAPI", "React", "Supabase", "pgvector", "Gemini", "Scrapy"],
+    color: "from-blue-500/10 to-cyan-500/10",
+    githubUrl: "https://github.com/VarunPahuja/ExitPlan",
+    longDescription: "Exit Plan started from a real decision problem — my sister weighing where to emigrate. It scores 10 countries against research-informed criteria (visa pathways, job market, cost of living, PR routes) and lets the user set their own priority weights at onboarding, producing a personalized, transparent ranking instead of a generic listicle. Deliberately not ML: 10 countries is too small a set to justify a learned model, there's no ground-truth label for 'best country,' and explainability matters when the decision is this consequential. A hand-built hybrid retrieval pipeline (pgvector similarity search plus keyword matching over 440+ policy chunks) grounds every answer in cited source text, built without a RAG framework by choice. A Scrapy pipeline monitors government portals for policy changes and fires email alerts, because stale immigration info is worse than no info at all.",
+    date: "2026",
+    features: [
+      "Research-informed country scoring with user-set priority weights",
+      "Hybrid retrieval (vector + keyword) over 440+ policy chunks, framework-free",
+      "Automated policy-change detection with email alerts",
+    ],
+    impact: [
+      "Deployed with real users",
+      "Grounded, cited answers instead of generic emigration advice",
+    ],
+  },
+  {
     id: "nowcard",
     title: "NowCard",
     hook: "Dynamic GitHub README card engine that showcases real-time music activity and developer context via live SVG rendering.",
@@ -55,7 +75,7 @@ export const projects: Project[] = [
   },
   {
     id: "nutricare",
-    title: "NutriCare (ongoing)",
+    title: "NutriCare ",
     hook: "Nutrition and fitness platform combining a modern dashboard with a modular ML pipeline for health insights.",
     description: "Chronic illness patients struggle to track nutrition meaningfully — NutriCare's FastAPI/ML pipeline predicts daily macro targets from patient data (R² 0.70 on 5K clinical records) and surfaces them on a React dashboard.",
     tags: ["TypeScript", "React", "Vite", "Tailwind", "shadcn/ui", "Python", "FastAPI", "ML"],
@@ -64,7 +84,7 @@ export const projects: Project[] = [
   },
   {
     id: "scenemetric",
-    title: "SceneMetric (ongoing)",
+    title: "SceneMetric ",
     hook: "Computer vision project focused on extracting structured insights and metrics from visual scenes.",
     description: "Editors waste hours manually logging shot types — SceneMetric combines OpenCV signal extraction with a rule-based model to classify close/medium/long shots and generate a plain-English narrative breakdown of any scene.",
     tags: ["Python", "OpenCV", "NumPy"],
@@ -111,7 +131,7 @@ export const projects: Project[] = [
   },
   {
     id: "vanetuav",
-    title: "VanetUAV (research paper)(ongoing)",
+    title: "VanetUAV (research)",
     hook: "Simulation-based research project on federated learning for intrusion detection in UAV and vehicular networks.",
     description: "Federated intrusion detection for UAV/vehicle networks breaks down on messy real-world data — research work testing model robustness under non-IID and adversarial conditions.",
     tags: ["Python", "Federated Learning", "ML", "Jupyter"],
