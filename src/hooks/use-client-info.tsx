@@ -11,9 +11,9 @@ function getBrowser(): string {
   
   if (ua.includes("Firefox")) return "Firefox";
   if (ua.includes("Edg")) return "Edge";
+  if (ua.includes("OPR") || ua.includes("Opera")) return "Opera";
   if (ua.includes("Chrome")) return "Chrome";
   if (ua.includes("Safari")) return "Safari";
-  if (ua.includes("Opera") || ua.includes("OPR")) return "Opera";
   
   return "Unknown Browser";
 }
@@ -22,11 +22,11 @@ function getOS(): string {
   const ua = navigator.userAgent;
   const platform = navigator.platform;
   
+  if (ua.includes("Android")) return "Android";
+  if (ua.includes("iPhone") || ua.includes("iPad") || ua.includes("iPod")) return "iOS";
   if (ua.includes("Win")) return "Windows";
   if (ua.includes("Mac")) return "macOS";
   if (ua.includes("Linux")) return "Linux";
-  if (ua.includes("Android")) return "Android";
-  if (ua.includes("iPhone") || ua.includes("iPad")) return "iOS";
   
   return platform || "Unknown OS";
 }
