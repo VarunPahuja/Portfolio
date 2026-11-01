@@ -42,11 +42,13 @@ const CanvasCard = ({
         ...style,
         rotate: rotation,
       }}
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0, scale: 0.85, y: 28 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{
-        opacity: { duration: 0.45, delay: entranceDelay.current },
-        scale: { duration: 0.45, delay: entranceDelay.current },
+        type: "spring",
+        stiffness: 210,
+        damping: 22,
+        delay: entranceDelay.current,
       }}
       whileHover={{ 
         scale: 1.02, 

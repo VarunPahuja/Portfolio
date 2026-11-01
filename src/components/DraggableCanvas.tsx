@@ -30,8 +30,19 @@ const DraggableCanvas = ({
   const [viewportSize, setViewportSize] = useState({ width: 0, height: 0 });
   const isMobile = useIsMobile();
 
-  // Mobile: scale down the canvas
-  const scale = isMobile ? 0.7 : 1;
+  // Fit the core cluster to the viewport on first paint; exploration beyond it stays draggable.
+  // Mobile keeps a tighter cap so text stays readable on small screens.
+  const scale = useMemo(() => {
+    if (!viewportSize.width || !viewportSize.height) return isMobile ? 0.7 : 1;
+    if (isMobile) {
+      // Fit the main profile card, not the whole cluster: readability first,
+      // the rest of the canvas stays a drag away.
+      return Math.min(0.7, viewportSize.width / 560);
+    }
+    const fitW = viewportSize.width / 1160;
+    const fitH = viewportSize.height / 980;
+    return Math.min(1, fitW, fitH);
+  }, [viewportSize.width, viewportSize.height, isMobile]);
   const scaledW = width * scale;
   const scaledH = height * scale;
 
@@ -153,8 +164,9 @@ const DraggableCanvas = ({
         className="absolute origin-top-left cursor-grab active:cursor-grabbing"
         style={{ x, y, width, height, scale }}
         drag={!isInteractingWithTile}
-        dragMomentum={false}
-        dragElastic={0}
+        dragMomentum={true}
+        dragElastic={0.06}
+        dragTransition={{ power: 0.25, timeConstant: 220 }}
         onDragStart={() => {
           setShowHint(false);
           localStorage.setItem("canvas-hint-seen", "true");

@@ -16,6 +16,49 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "bounded",
+    title: "Bounded",
+    hook: "Formal verification layer that proves an AI agent's payment actions stay within a spending mandate before they execute.",
+    description: "AI agents with payment access can overspend or break policy — Bounded compiles a plain-English spending mandate into a bounded-horizon SMT proof that no sequence of actions can breach it, then enforces that proof live in the path of a real payment rail.",
+    tags: ["Python", "Z3", "Formal Verification", "SMT", "Razorpay"],
+    color: "from-indigo-500/10 to-blue-500/10",
+    githubUrl: "https://github.com/VarunPahuja/bounded",
+    longDescription: "Bounded started from a simple worry: we are handing AI agents payment credentials faster than we are proving what they will do with them. It compiles a plain-English spending mandate into a transition system and uses Z3 bounded model checking to prove that no reachable sequence of actions, up to a fixed horizon, can breach the stated per-transaction cap, window-spend cap, or refund-bounded-by-capture invariant — the cumulative, multi-action guarantee that pre-action authorization checks miss. The same proof is then enforced live against the Razorpay test-mode rail, and the pipeline is measured against an LLM-judge baseline on a real adversarial corpus rather than asserted to be better. Built for the Razorpay buildathon.",
+    date: "2026",
+    features: [
+      "Mandate compilation to a transition system, verified with Z3 bounded model checking",
+      "Cumulative invariants across action sequences: per-transaction caps, window-spend caps, refund bounds",
+      "Live enforcement in the path of a real payment rail (Razorpay test mode)",
+    ],
+    impact: [
+      "0 unsound-safe verdicts across a 46-scenario adversarial pilot (LLM-judge baseline: 48)",
+      "0.0% false-positive rate on benign flows",
+      "Median Z3 verification latency of ~5ms over 800+ calls",
+    ],
+  },
+  {
+    id: "trace",
+    title: "Trace",
+    hook: "Python execution visualizer that runs real code in the browser, step by step.",
+    description: "Reading code teaches syntax; watching it run teaches thinking — Trace executes real Python in-browser via Pyodide and steps through each frame and variable, with 36 guided examples across 18 DSA topics, a Supabase-backed problem tracker, and LLM preprocessing for pasted code.",
+    tags: ["Next.js", "TypeScript", "Pyodide", "Supabase", "Tailwind"],
+    color: "from-emerald-500/10 to-teal-500/10",
+    githubUrl: "https://github.com/VarunPahuja/trace",
+    liveUrl: "https://tracepy.vercel.app",
+    longDescription: "Trace is a Python execution visualizer for people learning data structures and algorithms. It runs real Python in the browser through Pyodide — no server-side execution, no sandbox to maintain — and renders each step of the run as frames and variables change. It ships with 36 guided examples across 18 DSA topics, a Supabase-backed problem tracker for signed-in learners, and an LLM preprocessing step that normalizes pasted code so it can be visualized the same way.",
+    date: "2026",
+    features: [
+      "Real Python executed in-browser via Pyodide — zero backend execution cost",
+      "Step-by-step frame and variable visualization",
+      "36 guided examples across 18 DSA topics",
+      "Supabase-backed progress tracking and LLM preprocessing for pasted code",
+    ],
+    impact: [
+      "Live and usable today at tracepy.vercel.app",
+      "Scales to any number of learners at static-hosting cost",
+    ],
+  },
+  {
     id: "moviematch",
     title: "MovieMatch",
     hook: "Real-time movie matching app where users swipe in shared rooms and get matches based on mutual preferences.",
@@ -23,6 +66,16 @@ export const projects: Project[] = [
     tags: ["TypeScript", "React", "Firebase", "Firestore", "Tailwind", "shadcn/ui"],
     color: "from-blue-500/10 to-indigo-500/10",
     githubUrl: "https://github.com/VarunPahuja/MovieMatch",
+    longDescription: "MovieMatch started from a familiar stall: group movie nights dying in endless scrolling. It syncs swipes across shared rooms in real time over Firestore listeners, so a group lands on a pick in seconds instead of negotiating over thumbnails — the match is revealed the moment the room aligns.",
+    date: "2026",
+    features: [
+      "Real-time shared swipe rooms over Firestore",
+      "Mutual-match detection with instant reveal",
+      "Mobile-first UI with shadcn/ui and Tailwind",
+    ],
+    impact: [
+      "Turns group picking from minutes of scrolling into seconds",
+    ],
   },
   {
     id: "exit-plan",
@@ -98,8 +151,7 @@ export const projects: Project[] = [
     description: "Movie reviews carry more than positive/negative — this collaborative TF-IDF classifier (NB/LR/SVM, ~89% accuracy) adds emotion detection and keyword extraction for deeper insight.",
     tags: ["Python", "NLP", "Scikit-learn", "Transformers", "TF-IDF", "IMDb Dataset"],
     color: "from-sky-500/10 to-cyan-500/10",
-    // TODO: replace with correct repo URL or collaboration note
-    githubUrl: "",
+    githubUrl: "https://github.com/YugParekh/movie-review-sentiment",
   },
   {
     id: "flightdelay",
@@ -168,4 +220,3 @@ export const projects: Project[] = [
     category: "learning",
   },
 ];
-
