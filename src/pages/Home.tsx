@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import DraggableCanvas from "@/components/DraggableCanvas";
 import CanvasCard from "@/components/CanvasCard";
@@ -11,10 +12,12 @@ import MiniGameTile from "@/components/MiniGameTile";
 import FidgetSpinnerTile from "@/components/FidgetSpinnerTile";
 import NowCardTile from "@/components/NowCardTile";
 import { useAltName } from "@/hooks/use-alt-name";
+import { useIsMobile } from "@/hooks/use-mobile";
 import {
   FolderOpen, Camera, ArrowRight, Sparkles, Code, GraduationCap, Coffee, Music, ArrowLeft
 } from "lucide-react";
 import { experiences, education, socialLinks } from "@/data/profile";
+import { FileText } from "lucide-react";
 import profileAvatar from "@/assets/profile-avatar.jpg";
 import { stickers } from "@/data/stickers";
 import Sticker from "@/components/Stickers";
@@ -29,10 +32,52 @@ const GAP = 52;
 const Home = () => {
   const navigate = useNavigate();
   const { isAltName } = useAltName();
+  const isMobile = useIsMobile();
+  const [showIntro, setShowIntro] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return sessionStorage.getItem("intro-seen") !== "true";
+  });
+
+  useEffect(() => {
+    if (!showIntro) return;
+    sessionStorage.setItem("intro-seen", "true");
+    const t = setTimeout(() => setShowIntro(false), 2100);
+    return () => clearTimeout(t);
+  }, [showIntro]);
 
   return (
     <>
-      <DraggableCanvas width={CW} height={CH} initialFocus={{ x: CX, y: CY - 60 }}>
+      <AnimatePresence>
+        {showIntro && (
+          <motion.div
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-background"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0, scale: 1.06, filter: "blur(6px)" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="text-center px-6">
+              <motion.h1
+                className="text-5xl sm:text-7xl font-bold tracking-tight font-heading text-foreground"
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+              >
+                Varun Pahuja
+              </motion.h1>
+              <motion.p
+                className="mt-3 text-base sm:text-lg text-muted-foreground"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.45 }}
+              >
+                Backend & AI systems developer
+              </motion.p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <DraggableCanvas width={CW} height={CH} initialFocus={isMobile ? { x: CX - 0, y: CY + 40 } : { x: CX + 170, y: CY + 10 }}>
 
         {/* ========== CORE CENTER CLUSTER ========== */}
 
@@ -45,13 +90,25 @@ const Home = () => {
             <img src={profileAvatar} alt="Varun Pahuja" className="w-14 h-14 rounded-full object-cover object-top ring-2 ring-border shadow-lg" />
             <div>
               <h1 className="text-2xl font-bold tracking-tight text-card-foreground font-heading">Varun Pahuja</h1>
-              <p className="text-sm text-muted-foreground">ML & Systems Developer</p>
+              <p className="text-sm text-muted-foreground">Backend & AI Systems Developer</p>
               <p className="text-xs text-muted-foreground mt-0.5">Jaipur, India</p>
             </div>
           </div>
 
-          <p className="text-sm leading-relaxed text-card-foreground mb-5">
-            A Computer Science student working at the intersection of machine learning, systems, and product-focused development.
+          <p className="text-sm leading-relaxed text-card-foreground mb-3">
+            Final-year CS student at Manipal University Jaipur, building backend systems and formal verification tooling for AI agents.
+          </p>
+
+          <div className="flex items-center gap-2 mb-3">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <p className="text-xs font-medium text-emerald-600 dark:text-emerald-400">Open to engineering internships · Jan–Jun 2027</p>
+          </div>
+
+          <p className="text-xs text-muted-foreground mb-5 leading-relaxed">
+            Deloitte Capstone winner — led the backend of an AI-agent invoice approval system.
           </p>
 
           {/* Experience */}
@@ -103,6 +160,9 @@ const Home = () => {
                 <Button3D size="sm"><Icon className="w-4 h-4" />{label}</Button3D>
               </a>
             ))}
+            <a href="/VarunPahuja_Resume.pdf" target="_blank" rel="noopener noreferrer">
+              <Button3D size="sm" variant="ghost"><FileText className="w-4 h-4" />Resume</Button3D>
+            </a>
           </div>
           <ClientInfoBar />
         </CanvasCard>
@@ -123,7 +183,7 @@ const Home = () => {
             </div>
           </div>
           <p className="text-sm text-muted-foreground mb-4">
-            Machine learning, data-driven systems, and collaborative tools.
+            Verification tooling for AI agents, full-stack products, and ML systems.
           </p>
           <Button3D size="sm" onClick={() => navigate("/projects")}>
             View All <ArrowRight className="w-3.5 h-3.5" />
@@ -144,15 +204,15 @@ const Home = () => {
           <div className="space-y-2 text-xs">
             <div>
               <p className="font-semibold text-card-foreground mb-0.5">Languages</p>
-              <p className="text-muted-foreground">Python • Java • JavaScript • C++ • SQL</p>
+              <p className="text-muted-foreground">Python • TypeScript • JavaScript • Java • SQL</p>
             </div>
             <div>
               <p className="font-semibold text-card-foreground mb-0.5">Frameworks</p>
-              <p className="text-muted-foreground">React • Flask • Streamlit • Pandas</p>
+              <p className="text-muted-foreground">React • Next.js • FastAPI • Tailwind</p>
             </div>
             <div>
               <p className="font-semibold text-card-foreground mb-0.5">Tools</p>
-              <p className="text-muted-foreground">Git • Azure • Cosmos DB • CI/CD</p>
+              <p className="text-muted-foreground">Git • PostgreSQL • Supabase • CI/CD</p>
             </div>
           </div>
         </CanvasCard>
